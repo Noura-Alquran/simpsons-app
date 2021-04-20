@@ -19,7 +19,9 @@
            <img src="<%=element.image%>">
                      <p><%=element.character%></p>
                       <p><%=element.quote%></p>
-        <a href="/favorite-quotes/<%=element.id%>">View Details</a></div>
+                      <form action="/favorite-quotes/<%=element.id%>" method="get">
+                        <button>View Details</button>
+                    </form>
       <% }) %> 
 </body>
 </html>

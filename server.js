@@ -52,7 +52,7 @@ function getTenQuotes(req,res){
 function saveFavorite(req,res){
     console.log(req.body);
     const{quote,character,image,characterDirection}=req.body;
-    const sql='INSERT INTO simpsons (quote,character,image,characterDirection,source)VALUES ($1,$2,$3,$4,$5);';
+    const sql='INSERT INTO simpsons (quote,character,image,characterDirection,source)VALUES ($1,$2,$3,$4,$5) RETURNING id;';
     const safeValues=[quote,character,image,characterDirection,"api"];
     client.query(sql,safeValues).then(results=>{
         console.log(results.rows);
@@ -74,16 +74,16 @@ function Quotes(data){
    this.characterDirection=data.characterDirection;
 }
 function renderDetails(req,res){
-const quoteId=req.params.id;
+const quoteId=req.params.quote_id;
 const sql="SELECT * FROM simpsons WHERE id=$1;";
 const safevalue=[quoteId];
 client.query(sql,safevalue).then(results=>{
-    res.render('pages/details' ,{results:results.rows[0]});
+    res.render('pages/details' ,{results: results.rows[0]});
 }).catch(error=>console.log(error))
 
 }
 function updatehandling(req,res){
-    const quoteId=req.params.id;
+    const quoteId=req.params.quote_id;
     const{quote,character,image,characterDirection}=req.body;
     const sql="UPDATE simpsons SET quote=$1, character=$2,image=$3,characterDirection=$4,source=$5 WHERE id=$6;";
     const safevalue=[quoteId];
@@ -92,7 +92,7 @@ function updatehandling(req,res){
     }).catch(error=>console.log(error))
 }
 function deletehandling(req,res){
-    const quoteId=req.params.id;
+    const quoteId=req.params.quote_id;
     const sql="DELETE FROM simpsons WHERE id=$1;";
     const safevalue=[quoteId];
     client.query(sql,safevalue).then(results=>{
