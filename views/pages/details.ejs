@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/favorite-quotes"">My saved List</a>
+        </nav>
+    </header>
+    <%results.forEach(element=>{%>
+        <h1><%=element.quote%></h1>
+        <p><%=element.character%></p>
+        <img src="<%=element.image%>">
+        <p><%=element.characterDirection%></p>
+        <form action="/favorite-quotes/<%=element.id%>?_method=DELETE" method="post">
+            <button>DELETE FROM FAVORITE</button>
+        </form>
+        <form action="/favorite-quotes/<%=element.id%>?_method=PUT" method="post">
+
+            <input type="text" name="quote" value="<%=element.quote%>">
+            <input type="text" name="character" value="<%=element.character%>" >
+            <input type="text" name="image" value="<%=element.image%>">
+            <input type="text" name="characterDirection" value="<%=element.characterDirection%>">
+
+            <input type="submit" value="UPDATE">
+        </form>
+      <% }) %>
+  
+    
+</body>
+</html>

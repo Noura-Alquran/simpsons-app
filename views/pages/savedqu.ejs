@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/favorite-quotes"">My saved List</a>
+        </nav>
+    </header>
+
+    <%results.forEach(element=>{%>
+        <div>
+           <img src="<%=element.image%>">
+                     <p><%=element.character%></p>
+                      <p><%=element.quote%></p>
+        <a href="/favorite-quotes/<%=element.id%>">View Details</a></div>
+      <% }) %> 
+</body>
+</html>
